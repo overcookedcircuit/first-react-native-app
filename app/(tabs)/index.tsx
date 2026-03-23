@@ -1,20 +1,24 @@
+import { createHomeStyles } from "@/assets/styles/home.styles";
+import Header from "@/components/Header";
 import useTheme from "@/hooks/useTheme";
-import { Text, TouchableOpacity, View } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
-  const {toggleDarkMode} = useTheme();
+  const {toggleDarkMode, colors} = useTheme();
+
+  const homeStyles = createHomeStyles(colors);
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen123.</Text>
+    <LinearGradient colors={colors.gradients.background} style={homeStyles.container}>
+      <StatusBar barStyle={colors.statusBarStyle}/>
+    <SafeAreaView style = {homeStyles.safeArea}>
+      <Header />
       <TouchableOpacity onPress={toggleDarkMode}>
         <Text>Toggle the mod</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
+    </LinearGradient>
   );
 }
